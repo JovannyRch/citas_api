@@ -81,4 +81,19 @@ class Usuarios extends REST_Controller
             ), REST_Controller::HTTP_NOT_FOUND);
         }
     }
+
+    public function paciente_get($user_id)
+    {
+        $paciente = $this->Model_usuarios->getPaciente($user_id);
+
+        if ($paciente) {
+            $this->response($paciente, REST_Controller::HTTP_OK);
+        } else {
+            $this->response(array(
+                'status' => false,
+                'data' => $paciente,
+                'message' => 'The Specified user could not be found'
+            ), REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
 }

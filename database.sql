@@ -52,8 +52,11 @@ create table horarios(
 create table citas(
     id_cita int primary key not null auto_increment,
     hora time,
+    status varchar(20) default "Activo",
     id_horario int not null,
     foreign key(id_horario) references horarios(id_horario),
     id_medico int not null,
-    foreign key(id_medico) references medicos(id_medico)
+    foreign key(id_medico) references medicos(id_medico),
+    id_paciente int not null,
+    foreign key(id_paciente) references pacientes(id_paciente)
 );

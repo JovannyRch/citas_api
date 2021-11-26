@@ -46,7 +46,7 @@ class Model_usuarios extends MY_Model
 
     public function getPaciente($id_usuario)
     {
-        return $this->db->query("SELECT * from paciente where id_usuario = $id_usuario")->row_array();
+        return $this->db->query("SELECT * from pacientes where id_usuario = $id_usuario")->row_array();
     }
 
 }
