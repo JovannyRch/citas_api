@@ -59,6 +59,12 @@ class Db extends CI_Model
     {
         $this->db->set(array("status" => "Cancelado"))->where('id_cita', $id_cita)->update('citas');
         return $this->db->affected_rows() === 1;
+    }
+
+    public function eliminarCita($id_cita)
+    {
+        $this->db->where('id_cita', $id_cita)->delete('citas');
+        return $this->db->affected_rows() === 1;
 
     }
 }

@@ -49,4 +49,14 @@ class Citas extends REST_Controller
             $this->response(array('status' => 'success', 'message' => 'Cita cancelada'), REST_Controller::HTTP_NO_CONTENT); // NO_CONTENT (204) being the HTTP response code
         }
     }
+
+    public function eliminar_delete($id_cita)
+    {
+        $response = $this->Db->eliminarCita($id_cita);
+        if (!$response) {
+            $this->response(array('status' => 'failure', 'message' => 'Error al eliminar la cita'), REST_Controller::HTTP_INTERNAL_SERVER_ERROR);
+        } else {
+            $this->response(array('status' => 'success', 'message' => 'Cita eliminada'), REST_Controller::HTTP_NO_CONTENT); // NO_CONTENT (204) being the HTTP response code
+        }
+    }
 }
