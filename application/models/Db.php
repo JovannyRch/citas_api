@@ -31,10 +31,20 @@ class Db extends CI_Model
 
     public function getHorarios($medico_id)
     {
+        if($medico_id == null){
+        return $this->db->query("SELECT 
+        horarios.*, 
+        medicos.nombre_completo medico, 
+        especialidades.nombre especialidad
+        from 
+        horarios natural join medicos
+        natural join especialidades
+        ")->result_array();
+        }
         return $this->db->query("SELECT * from horarios where id_medico = $medico_id")->result_array();
     }
 
-    public function getCitasPorMedico($medico_id)
+    public function getCitasPorMedico($medico_id = null)
     {
         return $this->db->query("SELECT 
         c.id_cita,c.status,c.hora,h.fecha, p.nombre_completo paciente 
@@ -44,8 +54,18 @@ class Db extends CI_Model
         where id_medico = $medico_id")->result_array();
     }
 
-    public function getCitasPorPaciente($id_paciente)
+    public function getCitasPorPaciente($id_paciente = null)
     {
+
+        if($id_paciente == null){
+            return $this->db->query("SELECT 
+            c.id_cita,c.status,c.hora,h.fecha, m.nombre_completo medico, e.nombre especialidad
+            from citas c 
+            natural join horarios h
+            natural join medicos m
+            natural join especialidades e")->result_array();
+        }
+
         return $this->db->query("SELECT 
         c.id_cita,c.status,c.hora,h.fecha, m.nombre_completo medico, e.nombre especialidad
         from citas c 

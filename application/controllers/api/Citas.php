@@ -30,12 +30,12 @@ class Citas extends REST_Controller
         }
     }
 
-    public function medico_get($id_medico)
+    public function medico_get($id_medico = null)
     {
         $this->response($this->Db->getCitasPorMedico($id_medico), REST_Controller::HTTP_OK);
     }
 
-    public function paciente_get($id_paciente)
+    public function paciente_get($id_paciente = null)
     {
         $this->response($this->Db->getCitasPorPaciente($id_paciente), REST_Controller::HTTP_OK);
     }

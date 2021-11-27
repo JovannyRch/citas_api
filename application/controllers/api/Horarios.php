@@ -35,7 +35,12 @@ class Horarios extends REST_Controller
 
     public function index_get()
     {
-        $id_medico = $this->get('id_medico');
+        $id_medico = null;
+
+        if($this->get('id_medico') != null){
+            $id_medico = $this->get('id_medico');
+        }
+
         $this->response($this->Db->getHorarios($id_medico), REST_Controller::HTTP_OK);
     }
 }
