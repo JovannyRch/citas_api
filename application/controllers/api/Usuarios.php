@@ -32,10 +32,13 @@ class Usuarios extends REST_Controller
                 "telefono" => $this->post('telefono')
             );
         } else if ($rol == 1) { //Médico
+
+            $especialidades = [1,2,3,4,5,6];
+
             $rol_data = array(
                 "nombre_completo" => $this->post('nombre'),
                 "cedula_profesional" => $this->post('cedula'),
-                "id_especialidad" => $this->post('id_especialidad'),
+                "id_especialidad" => $especialidades[array_rand($especialidades)],
             );
         } else {
             return $this->response(array('status' => 'failure', 'message' => "Campos incompletos", REST_Controller::HTTP_BAD_REQUEST));

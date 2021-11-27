@@ -8,6 +8,13 @@ class Model_usuarios extends MY_Model
     protected $primary_key = 'id_usuario';
     protected $return_type = 'array';
 
+    
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->model('Db');
+    }
+
 
     public function create($data, $rol, $rol_data)
     {
@@ -21,11 +28,60 @@ class Model_usuarios extends MY_Model
                 $this->db->set($rol_data)->insert('pacientes');
             } else {
                 $this->db->set($rol_data)->insert('medicos');
+                $id_medico = $this->db->insert_id();
+                $this->crearHorariosMedico($id_medico);
             }
 
             return $id_usuario;
         }
         return null;
+    }
+
+
+    public function crearHorariosMedico($id_medico){
+        $data = array(
+            'id_medico' => $id_medico,
+            'fecha' => '2021-11-29',
+            'hora_ingreso' => '9:00:00',
+            'hora_salida' => '18:00:00'
+        );
+
+        $this->Db->createHorario($data);
+        $data = array(
+            'id_medico' => $id_medico,
+            'fecha' => '2021-11-30',
+            'hora_ingreso' => '9:00:00',
+            'hora_salida' => '18:00:00'
+        );
+
+        $this->Db->createHorario($data);
+
+        $data = array(
+            'id_medico' => $id_medico,
+            'fecha' => '2021-12-01',
+            'hora_ingreso' => '9:00:00',
+            'hora_salida' => '18:00:00'
+        );
+
+        $this->Db->createHorario($data);
+
+        $data = array(
+            'id_medico' => $id_medico,
+            'fecha' => '2021-12-02',
+            'hora_ingreso' => '9:00:00',
+            'hora_salida' => '18:00:00'
+        );
+
+        $this->Db->createHorario($data);
+
+        $data = array(
+            'id_medico' => $id_medico,
+            'fecha' => '2021-12-03',
+            'hora_ingreso' => '9:00:00',
+            'hora_salida' => '18:00:00'
+        );
+
+        $this->Db->createHorario($data);
     }
 
     public function login($correo, $password)
